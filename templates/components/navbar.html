@@ -1,9 +1,9 @@
-<header class="sticky top-0 z-40 border-b border-line/80 bg-paper/85 backdrop-blur-md">
+<header class="sticky top-0 z-40 border-b border-line/70 bg-paper/90 backdrop-blur-sm">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
     <a href="index.html" class="text-[15px] font-semibold tracking-tight">{{ business.name }}</a>
 
     <nav class="hidden items-center gap-8 text-sm text-mute md:flex">
-      <a href="index.html" class="hover:text-ink">Work</a>
+      <a href="index.html" class="hover:text-ink">Home</a>
       <a href="services.html" class="hover:text-ink">Services</a>
       <a href="contact.html" class="hover:text-ink">Contact</a>
       {% if business.phone %}
@@ -32,7 +32,7 @@
 
   <div id="mobile-menu" class="hidden border-t border-line px-6 pb-4 md:hidden">
     <div class="flex flex-col gap-1 pt-2 text-sm">
-      <a href="index.html" class="rounded-lg px-2 py-2">Work</a>
+      <a href="index.html" class="rounded-lg px-2 py-2">Home</a>
       <a href="services.html" class="rounded-lg px-2 py-2">Services</a>
       <a href="contact.html" class="rounded-lg px-2 py-2">Contact</a>
       {% if business.phone %}

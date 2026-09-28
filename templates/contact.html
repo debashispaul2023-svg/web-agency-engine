@@ -27,23 +27,11 @@
         <p class="font-serif text-3xl leading-tight">{{ business.address }}</p>
       </li>
       {% endif %}
+      {% if not business.phone and not business.email and not business.address %}
+      <li class="text-mute">Use the form. Contact details are not in the data file yet.</li>
+      {% endif %}
     </ul>
   </div>
-
-  <form class="space-y-4 rounded-3xl border border-line bg-white p-6 sm:p-8" action="#" method="post">
-    <label class="block">
-      <span class="mb-1 block text-sm text-mute">Name</span>
-      <input name="name" required class="w-full rounded-xl border border-line bg-paper px-4 py-3 outline-none focus:border-ink" />
-    </label>
-    <label class="block">
-      <span class="mb-1 block text-sm text-mute">Email</span>
-      <input name="email" type="email" required class="w-full rounded-xl border border-line bg-paper px-4 py-3 outline-none focus:border-ink" />
-    </label>
-    <label class="block">
-      <span class="mb-1 block text-sm text-mute">Message</span>
-      <textarea name="message" rows="5" required class="w-full rounded-xl border border-line bg-paper px-4 py-3 outline-none focus:border-ink"></textarea>
-    </label>
-    <button type="submit" class="w-full rounded-full bg-ink py-3 text-sm font-medium text-paper">Send message</button>
-  </form>
+  {% include "components/form.html" %}
 </section>
 {% endblock %}

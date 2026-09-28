@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}{{ business.name }}{% endblock %}</title>
   <meta name="description" content="{% if business.address %}{{ business.name }} — {{ business.address }}{% else %}{{ business.name }}{% endif %}" />
+  <meta name="theme-color" content="#f4f1eb" />
+  <meta property="og:title" content="{{ business.name }}" />
+  <meta property="og:description" content="{% if business.address %}{{ business.name }} — {{ business.address }}{% else %}{{ business.name }}{% endif %}" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23121212' width='32' height='32' rx='8'/%3E%3C/svg%3E" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -32,13 +36,15 @@
   <style>
     html { scroll-behavior: smooth; }
     body { background: #f4f1eb; color: #121212; }
+    ::selection { background: #121212; color: #f4f1eb; }
     .gsap-reveal { opacity: 1; }
     input, textarea { font: inherit; }
   </style>
 </head>
 <body class="min-h-screen font-sans antialiased">
+  <a href="#content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-paper">Skip to content</a>
   {% include "components/navbar.html" %}
-  <main>{% block content %}{% endblock %}</main>
+  <main id="content">{% block content %}{% endblock %}</main>
 
   <footer class="border-t border-line">
     <div class="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 text-sm text-mute sm:flex-row sm:items-center sm:justify-between">
@@ -52,7 +58,7 @@
   </footer>
 
   <div id="toast" class="pointer-events-none fixed bottom-6 left-1/2 z-50 hidden -translate-x-1/2 rounded-full bg-ink px-5 py-3 text-sm text-paper shadow-lg">
-    Message received. We’ll call you back.
+    Message saved on this page.
   </div>
 
   <script>
@@ -65,6 +71,7 @@
       toggle.addEventListener("click", function () {
         const open = menu.classList.toggle("hidden") === false;
         toggle.setAttribute("aria-expanded", String(open));
+        toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
         if (openIcon) openIcon.classList.toggle("hidden", open);
         if (closeIcon) closeIcon.classList.toggle("hidden", !open);
       });

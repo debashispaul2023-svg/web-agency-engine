@@ -1,0 +1,17 @@
+<form class="space-y-4 rounded-2xl border border-line bg-white p-6 sm:p-8" action="#" method="post">
+  <label class="block">
+    <span class="mb-1 block text-sm text-mute">Name</span>
+    <input name="name" required autocomplete="name" class="w-full rounded-xl border border-line bg-paper px-4 py-3 outline-none focus:border-ink" />
+  </label>
+  <label class="block">
+    <span class="mb-1 block text-sm text-mute">Phone</span>
+    <input name="phone" type="tel" required autocomplete="tel" class="w-full rounded-xl border border-line bg-paper px-4 py-3 outline-none focus:border-ink" />
+  </label>
+  <label class="block">
+    <span class="mb-1 block text-sm text-mute">What you need</span>
+    <textarea name="message" rows="5" required class="w-full rounded-xl border border-line bg-paper px-4 py-3 outline-none focus:border-ink"></textarea>
+  </label>
+  <button type="submit" class="w-full rounded-full bg-ink py-3 text-sm font-medium text-paper hover:bg-neutral-800">
+    Send
+  </button>
+</form>

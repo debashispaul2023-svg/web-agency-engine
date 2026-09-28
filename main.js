@@ -33,8 +33,12 @@
 
   const showToast = () => {
     const toast = document.getElementById("toast");
-    if (!toast || typeof gsap === "undefined") return;
+    if (!toast) return;
     toast.classList.remove("hidden");
+    if (typeof gsap === "undefined") {
+      window.setTimeout(() => toast.classList.add("hidden"), 2400);
+      return;
+    }
     gsap.fromTo(
       toast,
       { y: 24, opacity: 0 },
@@ -60,7 +64,9 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
           });
-        } catch (_) {}
+        } catch (_) {
+          /* preview / static hosts have no backend — still confirm locally */
+        }
         form.reset();
         showToast();
       });
