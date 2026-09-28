@@ -1,0 +1,43 @@
+<header class="sticky top-0 z-40 border-b border-line/80 bg-paper/85 backdrop-blur-md">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <a href="index.html" class="text-[15px] font-semibold tracking-tight">{{ business.name }}</a>
+
+    <nav class="hidden items-center gap-8 text-sm text-mute md:flex">
+      <a href="index.html" class="hover:text-ink">Work</a>
+      <a href="services.html" class="hover:text-ink">Services</a>
+      <a href="contact.html" class="hover:text-ink">Contact</a>
+      {% if business.phone %}
+      <a href="tel:{{ business.phone }}" class="cta-phone rounded-full bg-ink px-4 py-2 text-paper hover:bg-neutral-800">
+        Call {{ business.phone }}
+      </a>
+      {% endif %}
+    </nav>
+
+    <button
+      id="nav-toggle"
+      type="button"
+      class="grid h-10 w-10 place-items-center rounded-full border border-line md:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Open menu"
+    >
+      <svg id="icon-open" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-width="1.6" d="M5 8h14M5 16h14" />
+      </svg>
+      <svg id="icon-close" class="hidden h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-width="1.6" d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-line px-6 pb-4 md:hidden">
+    <div class="flex flex-col gap-1 pt-2 text-sm">
+      <a href="index.html" class="rounded-lg px-2 py-2">Work</a>
+      <a href="services.html" class="rounded-lg px-2 py-2">Services</a>
+      <a href="contact.html" class="rounded-lg px-2 py-2">Contact</a>
+      {% if business.phone %}
+      <a href="tel:{{ business.phone }}" class="cta-phone mt-2 rounded-full bg-ink px-4 py-3 text-center text-paper">Call {{ business.phone }}</a>
+      {% endif %}
+    </div>
+  </div>
+</header>

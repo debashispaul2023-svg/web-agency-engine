@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block title %}{{ business.name }}{% endblock %}
+
+{% block content %}
+<section class="mx-auto max-w-6xl px-6 pb-8 pt-16 sm:pt-24">
+  <p class="gsap-reveal text-sm text-mute">
+    {% if business.address %}{{ business.address }}{% else %}Local service studio{% endif %}
+  </p>
+  <h1 class="gsap-reveal mt-5 max-w-4xl font-serif text-[clamp(2.75rem,8vw,6.25rem)] leading-[0.95] tracking-tightest">
+    {{ business.name }}
+  </h1>
+  <p class="gsap-reveal mt-6 max-w-xl text-lg leading-relaxed text-mute">
+    Commercial work done quietly and on schedule.
+    {% if business.services %}
+      {{ business.services | join(', ') }}.
+    {% endif %}
+  </p>
+  <div class="gsap-reveal mt-8 flex flex-col gap-3 sm:flex-row">
+    {% if business.phone %}
+    <a href="tel:{{ business.phone }}" class="cta-phone inline-flex items-center justify-center rounded-full bg-ink px-6 py-3 text-sm font-medium text-paper">
+      Call {{ business.phone }}
+    </a>
+    {% endif %}
+    <a href="contact.html" class="inline-flex items-center justify-center rounded-full border border-line px-6 py-3 text-sm font-medium hover:border-ink">
+      Request a visit
+    </a>
+  </div>
+</section>
+
+<section class="mx-auto max-w-6xl px-6 py-8">
+  <div class="grid overflow-hidden rounded-3xl border border-line bg-white sm:grid-cols-3">
+    <div class="border-b border-line p-6 sm:border-b-0 sm:border-r">
+      <p class="text-xs uppercase tracking-[0.18em] text-mute">Since</p>
+      <p class="mt-3 font-serif text-3xl">Local crew</p>
+    </div>
+    <div class="border-b border-line p-6 sm:border-b-0 sm:border-r">
+      <p class="text-xs uppercase tracking-[0.18em] text-mute">Focus</p>
+      <p class="mt-3 font-serif text-3xl">{{ business.services[0] if business.services else "Field work" }}</p>
+    </div>
+    <div class="p-6">
+      <p class="text-xs uppercase tracking-[0.18em] text-mute">Reach</p>
+      <p class="mt-3 font-serif text-3xl">{% if business.phone %}Same-week{% else %}On request{% endif %}</p>
+    </div>
+  </div>
+</section>
+
+<section class="mx-auto max-w-6xl px-6 py-20">
+  <div class="mb-10 flex items-end justify-between gap-6">
+    <div>
+      <p class="text-sm text-mute">Services</p>
+      <h2 class="mt-2 font-serif text-4xl tracking-tight sm:text-5xl">What the shop actually does</h2>
+    </div>
+    <a href="services.html" class="hidden text-sm text-mute hover:text-ink sm:inline">See the list →</a>
+  </div>
+  <div class="divide-y divide-line border-y border-line">
+    {% for service in business.services %}
+    <a href="services.html" class="gsap-reveal group flex items-baseline justify-between gap-6 py-7">
+      <span class="font-serif text-2xl sm:text-3xl">{{ service }}</span>
+      <span class="text-sm text-mute group-hover:text-ink">0{{ loop.index }}</span>
+    </a>
+    {% else %}
+    <p class="py-8 text-mute">Services will appear after the next scrape.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="contact" class="border-t border-line bg-sand/50">
+  <div class="mx-auto grid max-w-6xl gap-12 px-6 py-20 lg:grid-cols-2">
+    <div>
+      <h2 class="font-serif text-4xl tracking-tight sm:text-5xl">Start a job</h2>
+      <p class="mt-4 max-w-md text-mute">
+        Short note is enough. No thank-you page — you’ll get a confirmation on this screen.
+      </p>
+      <ul class="mt-10 space-y-4 text-sm">
+        {% if business.phone %}
+        <li class="flex flex-col">
+          <span class="text-mute">Phone</span>
+          <a class="cta-phone text-lg" href="tel:{{ business.phone }}">{{ business.phone }}</a>
+        </li>
+        {% endif %}
+        {% if business.email %}
+        <li class="flex flex-col">
+          <span class="text-mute">Email</span>
+          <a class="cta-email text-lg" href="mailto:{{ business.email }}">{{ business.email }}</a>
+        </li>
+        {% endif %}
+        {% if business.address %}
+        <li class="flex flex-col">
+          <span class="text-mute">Shop</span>
+          <span class="text-lg">{{ business.address }}</span>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <form class="space-y-4 rounded-3xl border border-line bg-paper p-6 sm:p-8" action="#" method="post">
+      <label class="block">
+        <span class="mb-1 block text-sm text-mute">Name</span>
+        <input name="name" required class="w-full rounded-xl border border-line bg-white px-4 py-3 outline-none focus:border-ink" />
+      </label>
+      <label class="block">
+        <span class="mb-1 block text-sm text-mute">Email</span>
+        <input name="email" type="email" required class="w-full rounded-xl border border-line bg-white px-4 py-3 outline-none focus:border-ink" />
+      </label>
+      <label class="block">
+        <span class="mb-1 block text-sm text-mute">What needs doing</span>
+        <textarea name="message" rows="4" required class="w-full rounded-xl border border-line bg-white px-4 py-3 outline-none focus:border-ink"></textarea>
+      </label>
+      <button type="submit" class="w-full rounded-full bg-ink py-3 text-sm font-medium text-paper">Send</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

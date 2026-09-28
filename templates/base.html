@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}{{ business.name }}{% endblock %}</title>
+  <meta name="description" content="{% if business.address %}{{ business.name }} — {{ business.address }}{% else %}{{ business.name }}{% endif %}" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: "#121212",
+            paper: "#f4f1eb",
+            sand: "#eae4d9",
+            line: "#ddd6c8",
+            mute: "#5c574f",
+          },
+          fontFamily: {
+            sans: ["Instrument Sans", "ui-sans-serif", "system-ui"],
+            serif: ["Instrument Serif", "Georgia", "serif"],
+          },
+          letterSpacing: { tightest: "-0.045em" },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #f4f1eb; color: #121212; }
+    .gsap-reveal { opacity: 1; }
+    input, textarea { font: inherit; }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+  {% include "components/navbar.html" %}
+  <main>{% block content %}{% endblock %}</main>
+
+  <footer class="border-t border-line">
+    <div class="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 text-sm text-mute sm:flex-row sm:items-center sm:justify-between">
+      <p>© {{ business.name }}</p>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        {% if business.phone %}<a class="cta-phone hover:text-ink" href="tel:{{ business.phone }}">{{ business.phone }}</a>{% endif %}
+        {% if business.email %}<a class="cta-email hover:text-ink" href="mailto:{{ business.email }}">{{ business.email }}</a>{% endif %}
+        {% if business.address %}<span>{{ business.address }}</span>{% endif %}
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="pointer-events-none fixed bottom-6 left-1/2 z-50 hidden -translate-x-1/2 rounded-full bg-ink px-5 py-3 text-sm text-paper shadow-lg">
+    Message received. We’ll call you back.
+  </div>
+
+  <script>
+    (function () {
+      const toggle = document.getElementById("nav-toggle");
+      const menu = document.getElementById("mobile-menu");
+      const openIcon = document.getElementById("icon-open");
+      const closeIcon = document.getElementById("icon-close");
+      if (!toggle || !menu) return;
+      toggle.addEventListener("click", function () {
+        const open = menu.classList.toggle("hidden") === false;
+        toggle.setAttribute("aria-expanded", String(open));
+        if (openIcon) openIcon.classList.toggle("hidden", open);
+        if (closeIcon) closeIcon.classList.toggle("hidden", !open);
+      });
+    })();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
